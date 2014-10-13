@@ -21,9 +21,15 @@ header {
   span.logo-mark {
     font-weight: bold;
   }
+  a.logo-mark {
+    float: none;
+    text-decoration: none;
+    font-weight: none;
+  }
   a {
     float: right;
     color: $very_light_gray;
+    margin-left: $wide;
   }
 }
 footer {
