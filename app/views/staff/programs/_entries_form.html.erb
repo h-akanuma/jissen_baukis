@@ -28,7 +28,7 @@
             m.input attributes
           end
           m.td do
-            attributes = { type: 'checkbox' }
+            attributes = { type: 'checkbox', class: 'canceled' }
             attributes['data-entry-id'] = e.id
             attributes[:checked] = 'checked' if e.canceled?
             m.input attributes
