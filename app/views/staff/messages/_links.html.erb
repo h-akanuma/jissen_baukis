@@ -4,6 +4,6 @@
   <%= link_to '全メッセージ一覧', :staff_messages %>
   <%= link_to 'ゴミ箱', :deleted_staff_messages %>
   <% if @message.kind_of?(CustomerMessage) %>
-    <%= link_to '返信する', new_staff_message_reply_path(@message) %>
+    <%= link_to '返信する', new_staff_message_replies_path(@message) %>
   <% end %>
 </div>
