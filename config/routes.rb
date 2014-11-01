@@ -6,11 +6,26 @@ Rails.application.routes.draw do
       root   'top#index'
       get    'login'   => 'sessions#new',    as: :login
       resource :session, only: [:create, :destroy]
-      resource :account, except: [:new, :create, :destroy]
+      resource :account, except: [:new, :create, :destroy] do
+        patch :confirm
+      end
       resource :password, only: [:show, :edit, :update]
       resources :customers
       resources :programs do
         patch :entries, on: :member
+      end
+      resources :messages, only: [ :index, :show, :destroy ] do
+        get :inbound, :outbound, :deleted, :count, on: :collection
+        post :tag, on: :member
+        delete :tag, on: :member
+        resource :replies, only: [ :new, :create ] do
+          post :confirm
+        end
+      end
+      resources :tags, only: [] do
+        resources :messages, only: [ :index ] do
+          get :inbound, :outbound, on: :collection
+        end
       end
     end
   end
@@ -35,10 +50,16 @@ Rails.application.routes.draw do
       root 'top#index'
       get 'login' => 'sessions#new', as: :login
       resource :session, only: [ :create, :destroy ]
+      resource :account, except: [ :new, :create, :destroy ] do
+        patch :confirm
+      end
       resources :programs, only: [ :index, :show ] do
         resources :entries, only: [ :create ] do
           patch :cancel, on: :member
         end
+      end
+      resources :messages, only: [ :new, :create ] do
+        post :confirm, on: :collection
       end
     end
   end
