@@ -27,7 +27,12 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: baukis_test
+  #database: baukis_test
+  Host: WERCKER_MYSQL_HOST
+  Port: WERCKER_MYSQL_PORT
+  Username: WERCKER_MYSQL_USERNAME
+  Password: WERCKER_MYSQL_PASSWORD
+  Database: WERCKER_MYSQL_DATABASE
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
